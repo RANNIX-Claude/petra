@@ -1215,10 +1215,8 @@ export default function Ingresos() {
                         </td>
                         <td style={{ padding:'10px 14px', fontSize:'11px', color:'var(--color-text-light)', maxWidth:'180px', overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>{r.nota || ''}</td>
                         <td style={{ padding:'8px 10px', whiteSpace:'nowrap' }}>
-                          <button onClick={e => { e.stopPropagation(); setVerDetalle(r) }} title="Ver detalle"
+                          <button onClick={e => { e.stopPropagation(); setModalData(r) }} title="Ver / Editar"
                             style={{ marginRight:'4px', padding:'5px 7px', background:'#EFF6FF', color:'#0A66C2', border:'none', borderRadius:'6px', cursor:'pointer', display:'inline-flex', alignItems:'center' }}><Eye size={13} /></button>
-                          <button onClick={e => { e.stopPropagation(); setModalData(r) }} title="Editar"
-                            style={{ marginRight:'4px', padding:'5px 7px', background:'#F3F4F6', color:'#374151', border:'none', borderRadius:'6px', cursor:'pointer', display:'inline-flex', alignItems:'center' }}><Pencil size={13} /></button>
                           <button onClick={e => { e.stopPropagation(); setConfirmDel(r) }} title="Eliminar"
                             style={{ padding:'5px 7px', background:'#FEF2F2', color:'#B91C1C', border:'none', borderRadius:'6px', cursor:'pointer', display:'inline-flex', alignItems:'center' }}><Trash2 size={13} /></button>
                         </td>
