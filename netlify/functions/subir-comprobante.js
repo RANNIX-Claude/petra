@@ -127,8 +127,9 @@ exports.handler = async (event) => {
 
   if (!upRes.ok) {
     const errText = await upRes.text().catch(() => '')
-    console.error('subir-comprobante storage', upRes.status, errText)
-    return responder(502, { error: `Storage devolvió ${upRes.status}: ${errText.slice(0, 200)}` })
+    const host = new URL(SUPABASE_URL).hostname
+    console.error('subir-comprobante storage', upRes.status, host, errText)
+    return responder(502, { error: `Storage devolvió ${upRes.status} (${host}): ${errText.slice(0, 200)}` })
   }
 
   const publicUrl = `${SUPABASE_URL}/storage/v1/object/public/${targetBucket}/${filePath}`
