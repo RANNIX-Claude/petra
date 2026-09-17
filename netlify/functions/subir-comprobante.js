@@ -34,7 +34,8 @@ const MIMES = [
 ]
 
 const MAX_BYTES = 15 * 1024 * 1024   // 15 MB
-const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+// Acepta UUID estándar o BIGINT (ingresos.id es bigint, contratos.id es uuid)
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$|^\d+$/i
 
 // Solo el propio sitio y el entorno de desarrollo. Antes era '*', que dejaba a
 // cualquier página del mundo llamar a la función desde el navegador.
