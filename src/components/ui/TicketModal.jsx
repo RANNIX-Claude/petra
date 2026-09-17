@@ -347,8 +347,7 @@ export default function TicketModal({ gasto = null, onClose, onSaved }) {
           const { data: upData, error: errUp } = await supabase.storage.from('tickets-gastos').upload(path, blob, { upsert: true })
           if (errUp) throw new Error(errUp.message)
           if (upData?.path) {
-            const storagePath = upData.fullPath || upData.path
-            await supabase.from('gastos_operativos').update({ ticket_url: storagePath }).eq('id', gastoId)
+            await supabase.from('gastos_operativos').update({ ticket_url: upData.path }).eq('id', gastoId)
           }
         } catch (errImg) { toast.error('Foto no guardada: ' + errImg.message) }
       }
