@@ -5,7 +5,7 @@ export default function Footer() {
       textAlign: 'center', padding: '12px 16px', fontSize: '12px',
       borderTop: '3px solid var(--color-secondary)',
     }}>
-      © IRP by RANNIX Consulting | v1.0 | 2026
+      © Petra by RANNIX Consulting | v1.0 | 2026
     </footer>
   )
 }

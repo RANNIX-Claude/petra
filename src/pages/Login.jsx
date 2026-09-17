@@ -55,10 +55,10 @@ export default function Login() {
             <Building2 size={32} color="white" />
           </div>
           <h1 style={{ fontSize: '22px', fontWeight: 700, color: 'var(--color-text)', margin: '0 0 4px' }}>
-            IRP
+            Petra
           </h1>
           <p style={{ fontSize: '13px', color: 'var(--color-text-light)', margin: 0 }}>
-            IWOL Resource Planning
+            Inmueble Resource Planning
           </p>
         </div>
 

@@ -2815,7 +2815,7 @@ function TabNominaIWOL() {
 
   const exportarExcel = async () => {
     const wb = new ExcelJS.Workbook()
-    wb.creator = 'IRP — RANNIX Consulting'
+    wb.creator = 'Petra — RANNIX Consulting'
     const sheetName = labelSemana(semana.lunes, semana.domingo).substring(0, 31)
     const ws = wb.addWorksheet(sheetName)
 

@@ -819,7 +819,7 @@ function generarFormatoInvestigacion(prospecto, personas, docs, despacho) {
   </div>
 
   <div style="margin-top:24px;font-size:10px;color:#9CA3AF;text-align:center">
-    Documento generado por IRP — RANNIX Consulting · ${new Date().toISOString()}
+    Documento generado por Petra — RANNIX Consulting · ${new Date().toISOString()}
   </div>
   </body></html>`
 
@@ -872,7 +872,7 @@ function ModalEnviarDespacho({ prospecto, personas, docs, onClose, onDone }) {
         </div>
 
         <div style={{ background:'#F5F3FF', borderRadius:10, border:'1px solid #DDD6FE', padding:'12px 16px', marginBottom:20, fontSize:13, color:'#5B21B6' }}>
-          El despacho elaborará el contrato. El administrador generará los pagarés en IRP una vez firmado.
+          El despacho elaborará el contrato. El administrador generará los pagarés en Petra una vez firmado.
         </div>
 
         <div style={{ marginBottom:16 }}>

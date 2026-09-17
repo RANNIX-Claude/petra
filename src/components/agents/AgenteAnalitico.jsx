@@ -28,7 +28,7 @@ export default function AgenteAnalitico({ dataSummary = {} }) {
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '16px' }}>
         <BarChart3 size={20} color="var(--color-primary)" />
         <div>
-          <div style={{ fontWeight: 600, fontSize: '15px' }}>Agente Analitico IRP</div>
+          <div style={{ fontWeight: 600, fontSize: '15px' }}>Agente Analitico Petra</div>
           <div style={{ fontSize: '12px', color: 'var(--color-text-light)' }}>Data Warehouse - Metricas - Tendencias</div>
         </div>
       </div>

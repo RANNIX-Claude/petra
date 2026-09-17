@@ -713,7 +713,7 @@ function generarHTML({ iniStr, finStr, pensiones, estac, parkingData, vending, g
   </div>
 
   <div class="footer">
-    <span>RANNIX Consulting · IRP — Plaza IWOL</span>
+    <span>RANNIX Consulting · Petra</span>
     <span>Firma administrador: ________________________</span>
   </div>
 </body>

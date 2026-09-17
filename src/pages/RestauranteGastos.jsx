@@ -113,7 +113,7 @@ async function exportarReporteSemanal(gastos, semLabel) {
   const tituloSem = `SEMANA DEL ${d1.getDate()} AL ${d2.getDate()} DE ${MESES_L[d2.getMonth()]} DE ${d2.getFullYear()}`
 
   const wb = new ExcelJS.Workbook()
-  wb.creator = 'IRP — RANNIX Consulting'
+  wb.creator = 'Petra — RANNIX Consulting'
   const ws = wb.addWorksheet('Semana')
 
   // Anchos de columna

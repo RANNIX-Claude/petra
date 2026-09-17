@@ -473,7 +473,7 @@ export default function PortalProspecto() {
       {/* Header */}
       <div style={{ background:'#1A3C5E', padding:'14px 20px', display:'flex', justifyContent:'space-between', alignItems:'center' }}>
         <div>
-          <div style={{ fontSize:15, fontWeight:800, color:'white' }}>IRP — Portal de Documentación</div>
+          <div style={{ fontSize:15, fontWeight:800, color:'white' }}>Petra — Portal de Documentación</div>
           <div style={{ fontSize:11, color:'rgba(255,255,255,0.55)' }}>Proceso de arrendamiento</div>
         </div>
         {diasRestantes !== null && (
@@ -538,7 +538,7 @@ export default function PortalProspecto() {
 
         <div style={{ textAlign:'center', fontSize:11, color:'#C4C9D0', marginTop:20, lineHeight:1.6 }}>
           Tu información es confidencial y solo será usada para el proceso de arrendamiento.<br />
-          IRP — Inmueble Resource Planning · RANNIX Consulting
+          Petra — Inmueble Resource Planning · RANNIX Consulting
         </div>
       </div>
     </div>

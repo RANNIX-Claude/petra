@@ -185,13 +185,13 @@ function generarReportePDF(nombre, categoria, { columnas, filas, totalLabel, tot
   </style>
   </head><body>
   <h1>${nombre}</h1>
-  <div class="meta">Categoría: ${categoria} &nbsp;·&nbsp; Generado el ${fecha} &nbsp;·&nbsp; IRP — IWOL Resource Planning</div>
+  <div class="meta">Categoría: ${categoria} &nbsp;·&nbsp; Generado el ${fecha} &nbsp;·&nbsp; Petra — Inmueble Resource Planning</div>
   <table>
     <tr>${columnas.map(c => `<th>${c}</th>`).join('')}</tr>
     ${filasHtml}
     ${totalHtml}
   </table>
-  <div class="footer"><span>IRP · RANNIX Consulting 2026</span><span>${nombre}</span></div>
+  <div class="footer"><span>Petra · RANNIX Consulting 2026</span><span>${nombre}</span></div>
   </body></html>`)
   win.document.close()
   win.print()

@@ -5,7 +5,7 @@ import { chatOperativo } from '../../lib/claude'
 export default function AgenteOperativo() {
   const [open, setOpen] = useState(false)
   const [messages, setMessages] = useState([
-    { role: 'assistant', content: '¡Hola! Soy el Agente Operativo de IRP. ¿En qué puedo ayudarte con la administración de tus inmuebles?' }
+    { role: 'assistant', content: '¡Hola! Soy el Agente Operativo de Petra. ¿En qué puedo ayudarte con la administración de tus inmuebles?' }
   ])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
@@ -65,7 +65,7 @@ export default function AgenteOperativo() {
             <Bot size={20} color="white" />
             <div>
               <div style={{ color: 'white', fontWeight: 700, fontSize: '14px' }}>Agente Operativo</div>
-              <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: '11px' }}>IRP — RANNIX Consulting</div>
+              <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: '11px' }}>Petra — RANNIX Consulting</div>
             </div>
           </div>
 
