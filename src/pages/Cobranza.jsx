@@ -653,8 +653,8 @@ export default function Cobranza() {
   const carteraVencida = lista.filter(c => c.estado !== 'PAGADO' && c.estado !== 'CANCELADO' && new Date(c.fecha_vencimiento) < hoy)
   const carteraVencidaSum = carteraVencida.reduce((a, c) => a + (parseFloat(c.saldo) || 0), 0)
 
-  const inicioMes = new Date(anioFiltro, mesFiltro - 1, 1)
-  const finMes    = new Date(anioFiltro, mesFiltro, 0, 23, 59, 59)
+  const inicioMes = new Date(anioFiltro, mesFiltro === 0 ? 0 : mesFiltro - 1, 1)
+  const finMes    = new Date(anioFiltro, mesFiltro === 0 ? 12 : mesFiltro, 0, 23, 59, 59)
   const pagadoMes = lista
     .filter(c => c.estado === 'PAGADO' && new Date(c.fecha_vencimiento) >= inicioMes && new Date(c.fecha_vencimiento) <= finMes)
     .reduce((a, c) => a + (parseFloat(c.total_aplicado) || 0), 0)
@@ -673,7 +673,7 @@ export default function Cobranza() {
       || (c.contrato_folio || '').toLowerCase().includes(q)
     const matchEst = filtroEstado === 'Todos' || c.estado === filtroEstado
       || (filtroEstado === 'VENCIDA' && c.estado !== 'PAGADO' && c.estado !== 'CANCELADO' && new Date(c.fecha_vencimiento) < hoy)
-    const matchMes = mesFiltro === 0 || (c.periodo_mes === mesFiltro && c.periodo_anio === anioFiltro)
+    const matchMes = mesFiltro === 0 ? c.periodo_anio === anioFiltro : (c.periodo_mes === mesFiltro && c.periodo_anio === anioFiltro)
     return matchQ && matchEst && matchMes
   }
 
@@ -711,7 +711,7 @@ export default function Cobranza() {
       {/* KPIs */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px', marginBottom: '20px' }}>
         <KPICard title="Cartera Vencida" value={`$${(carteraVencidaSum / 1000).toFixed(0)}K`} icon={AlertTriangle} color="var(--color-danger)" />
-        <KPICard title={`Pagado ${MES_NOMBRES[mesFiltro]}`} value={`$${(pagadoMes / 1000).toFixed(0)}K`} icon={CheckCircle} color="var(--color-success)" />
+        <KPICard title={mesFiltro === 0 ? `Pagado ${anioFiltro}` : `Pagado ${MES_NOMBRES[mesFiltro]}`} value={`$${(pagadoMes / 1000).toFixed(0)}K`} icon={CheckCircle} color="var(--color-success)" />
         <KPICard title="Por Cobrar" value={`$${(porCobrar / 1000).toFixed(0)}K`} icon={Clock} color="var(--color-warning)" />
         <KPICard title="Ingresos sin Aplicar" value={ingresosLibres} icon={DollarSign} color="var(--color-secondary)" />
       </div>
@@ -739,18 +739,22 @@ export default function Cobranza() {
             </div>
 
             <select
-              value={mesFiltro === 0 ? '0-0' : `${mesFiltro}-${anioFiltro}`}
-              onChange={e => {
-                const [m, y] = e.target.value.split('-').map(Number)
-                setMesFiltro(m); setAnioFiltro(y || anioFiltro)
-              }}
-              style={{ padding: '9px 12px', border: '1.5px solid #E5E7EB', borderRadius: '8px', fontSize: '13px', minWidth: '140px' }}>
-              <option value="0-0">Todos los períodos</option>
-              {[2025, 2026, 2027].flatMap(y =>
-                MES_NOMBRES.slice(1).map((m, i) => (
-                  <option key={`${i+1}-${y}`} value={`${i+1}-${y}`}>{m} {y}</option>
-                ))
-              )}
+              value={anioFiltro}
+              onChange={e => setAnioFiltro(Number(e.target.value))}
+              style={{ padding: '9px 12px', border: '1.5px solid #E5E7EB', borderRadius: '8px', fontSize: '13px', minWidth: '90px' }}>
+              {[2024, 2025, 2026, 2027].map(y => (
+                <option key={y} value={y}>{y}</option>
+              ))}
+            </select>
+
+            <select
+              value={mesFiltro}
+              onChange={e => setMesFiltro(Number(e.target.value))}
+              style={{ padding: '9px 12px', border: '1.5px solid #E5E7EB', borderRadius: '8px', fontSize: '13px', minWidth: '110px' }}>
+              <option value={0}>Todos</option>
+              {MES_NOMBRES.slice(1).map((m, i) => (
+                <option key={i + 1} value={i + 1}>{m}</option>
+              ))}
             </select>
 
             <select value={filtroConcepto} onChange={e => setFiltroConcepto(e.target.value)}
