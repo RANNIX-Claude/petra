@@ -1,6 +1,6 @@
 import { useModuleAudit, logAudit } from '../hooks/useAudit'
 import { useState, useEffect, useCallback, useRef } from 'react'
-import { Receipt, Plus, X, Search, Pencil, Trash2, ChevronDown, ChevronRight, AlertTriangle, Check, BookUser, ToggleLeft, ToggleRight, Images, Loader2, Eye } from 'lucide-react'
+import { Receipt, Plus, X, Search, Pencil, Trash2, ChevronDown, ChevronRight, AlertTriangle, Check, BookUser, ToggleLeft, ToggleRight, Images, Loader2, Eye, Paperclip } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import toast from 'react-hot-toast'
 import TicketModal from '../components/ui/TicketModal'
@@ -908,19 +908,30 @@ export default function GastosOperativos() {
                             {idx===items.length-1 ? fmt(dayTotal) : ''}
                           </td>
                           <td style={{ padding:'10px 12px' }}>
-                            {lineas.length > 0
-                              ? <span style={{ display:'flex', alignItems:'center', gap:4, fontSize:12, color:cuadra?'#057642':'#B24020', fontWeight:700 }}>
-                                  {cuadra?<Check size={13}/>:<AlertTriangle size={13}/>} {lineas.length} líneas
+                            <div style={{ display:'flex', alignItems:'center', gap:6 }}>
+                              {lineas.length > 0
+                                ? <span style={{ display:'flex', alignItems:'center', gap:4, fontSize:12, color:cuadra?'#057642':'#B24020', fontWeight:700 }}>
+                                    {cuadra?<Check size={13}/>:<AlertTriangle size={13}/>} {lineas.length} líneas
+                                  </span>
+                                : <span style={{ fontSize:12, color:'#9CA3AF' }}>Sin detalle</span>}
+                              {g.ticket_url && (
+                                <span title="Tiene imagen adjunta" style={{ color:'#6B7280', display:'flex', alignItems:'center' }}>
+                                  <Paperclip size={12}/>
                                 </span>
-                              : <span style={{ fontSize:12, color:'#9CA3AF' }}>Sin detalle</span>}
+                              )}
+                            </div>
                           </td>
                           <td style={{ padding:'10px 12px' }}>
                             <div style={{ display:'flex', gap:5 }}>
+                              <button onClick={e => { e.stopPropagation(); toggleExpand(g.id) }} title="Ver detalle"
+                                style={{ padding:'4px 8px', background: isOpen?'#F0FDF4':'#F9FAFB', color: isOpen?'#057642':'#6B7280', border:'none', borderRadius:5, cursor:'pointer' }}>
+                                <Eye size={12}/>
+                              </button>
                               {g.ticket_url && (
-                                <EnlacePrivado bucket="tickets-gastos" valor={g.ticket_url} title="Ver ticket" style={{ display:'inline-flex', padding:'4px 8px', background:'#F0FDF4', color:'#057642', border:'none', borderRadius:5, cursor:'pointer' }}><Eye size={12}/></EnlacePrivado>
+                                <EnlacePrivado bucket="tickets-gastos" valor={g.ticket_url} title="Ver imagen del ticket" style={{ display:'inline-flex', padding:'4px 8px', background:'#F0FDF4', color:'#057642', border:'none', borderRadius:5, cursor:'pointer' }}><Paperclip size={12}/></EnlacePrivado>
                               )}
-                              <button onClick={e => { e.stopPropagation(); setModal(g) }} style={{ padding:'4px 8px', background:'#EFF6FF', color:'#0A66C2', border:'none', borderRadius:5, cursor:'pointer' }}><Pencil size={12}/></button>
-                              <button onClick={e => { e.stopPropagation(); eliminar(g) }} style={{ padding:'4px 8px', background:'#FEE2E2', color:'#B24020', border:'none', borderRadius:5, cursor:'pointer' }}><Trash2 size={12}/></button>
+                              <button onClick={e => { e.stopPropagation(); setModal(g) }} title="Editar" style={{ padding:'4px 8px', background:'#EFF6FF', color:'#0A66C2', border:'none', borderRadius:5, cursor:'pointer' }}><Pencil size={12}/></button>
+                              <button onClick={e => { e.stopPropagation(); eliminar(g) }} title="Eliminar" style={{ padding:'4px 8px', background:'#FEE2E2', color:'#B24020', border:'none', borderRadius:5, cursor:'pointer' }}><Trash2 size={12}/></button>
                             </div>
                           </td>
                         </tr>
