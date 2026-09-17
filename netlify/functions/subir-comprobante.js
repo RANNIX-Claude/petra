@@ -13,6 +13,10 @@
 
 const { createClient } = require('@supabase/supabase-js')
 
+// Node.js 20 en Netlify Functions no tiene WebSocket nativo; supabase-js lo requiere
+// para realtime. Lo polyfillamos con el paquete ws (ya en node_modules).
+if (typeof WebSocket === 'undefined') global.WebSocket = require('ws')
+
 const SUPABASE_URL = process.env.VITE_SUPABASE_URL || 'https://kusuoxwzdxfuybvyiakg.supabase.co'
 const SERVICE_KEY  = process.env.SUPABASE_SERVICE_ROLE_KEY
 
