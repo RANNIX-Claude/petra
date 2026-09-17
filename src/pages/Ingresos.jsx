@@ -926,9 +926,16 @@ export default function Ingresos() {
   const periodoYYYYMM = `${filtroAnio}-${String(filtroMes).padStart(2, '0')}`
   const periodoIdx = filtroAnio * 12 + filtroMes
 
-  const enPeriodo = r => filtroModo === 'fecha_pago'
-    ? mesDeFechaPago(r) === periodoYYYYMM
-    : r.mes === filtroMes && r.anio === filtroAnio
+  const enPeriodo = r => {
+    if (filtroMes === 0) {
+      return filtroModo === 'fecha_pago'
+        ? (mesDeFechaPago(r) || '').startsWith(String(filtroAnio))
+        : r.anio === filtroAnio
+    }
+    return filtroModo === 'fecha_pago'
+      ? mesDeFechaPago(r) === periodoYYYYMM
+      : r.mes === filtroMes && r.anio === filtroAnio
+  }
 
   const filtrados = useMemo(() => {
     const q = search.toLowerCase()
@@ -999,9 +1006,11 @@ export default function Ingresos() {
 
   // Recibido vs. correspondido: `fecha` es cuándo se pagó, `mes`/`anio` a qué renta
   // corresponde. Siempre se parte de la fecha de pago, aunque el toggle esté en período.
-  const rentasRecibidas = lista.filter(r => r.tipo === 'RENTA' && r.importe != null && mesDeFechaPago(r) === periodoYYYYMM)
-  const rentaDelMesEnTurno = rentasRecibidas.filter(r => r.anio * 12 + r.mes === periodoIdx)
-  const rentaDeMesesAnteriores = rentasRecibidas.filter(r => r.anio * 12 + r.mes < periodoIdx)
+  const rentasRecibidas = filtroMes === 0
+    ? lista.filter(r => r.tipo === 'RENTA' && r.importe != null && (mesDeFechaPago(r) || '').startsWith(String(filtroAnio)))
+    : lista.filter(r => r.tipo === 'RENTA' && r.importe != null && mesDeFechaPago(r) === periodoYYYYMM)
+  const rentaDelMesEnTurno = filtroMes === 0 ? rentasRecibidas : rentasRecibidas.filter(r => r.anio * 12 + r.mes === periodoIdx)
+  const rentaDeMesesAnteriores = filtroMes === 0 ? [] : rentasRecibidas.filter(r => r.anio * 12 + r.mes < periodoIdx)
 
   const eliminar = async (r) => {
     const { error } = await supabase.from('ingresos').delete().eq('id', r.id)
@@ -1020,7 +1029,7 @@ export default function Ingresos() {
         <div>
           <h1 style={{ fontSize:'22px', fontWeight:700, margin:'0 0 4px' }}>Ingresos</h1>
           <p style={{ fontSize:'13px', color:'var(--color-text-light)', margin:0 }}>
-            {filtroModo === 'fecha_pago' ? 'Fecha de pago' : 'Período de renta'}: {MESES[filtroMes]} {filtroAnio} · {filtrados.filter(r => r.es_principal).length} contratos con pago
+            {filtroModo === 'fecha_pago' ? 'Fecha de pago' : 'Período de renta'}: {filtroMes === 0 ? 'Todo' : MESES[filtroMes]} {filtroAnio} · {filtrados.filter(r => r.es_principal).length} contratos con pago
           </p>
         </div>
         <button onClick={() => setModalData('nuevo')} style={{
@@ -1083,6 +1092,7 @@ export default function Ingresos() {
         {/* Mes/Año */}
         <select value={filtroMes} onChange={e => setFiltroMes(parseInt(e.target.value))}
           style={{ padding:'8px 12px', border:'1.5px solid #E5E7EB', borderRadius:'8px', fontSize:'13px' }}>
+          <option value={0}>Todos</option>
           {MESES.slice(1).map((m,i) => <option key={i+1} value={i+1}>{m}</option>)}
         </select>
         <select value={filtroAnio} onChange={e => setFiltroAnio(parseInt(e.target.value))}
@@ -1217,6 +1227,8 @@ export default function Ingresos() {
                         <td style={{ padding:'8px 10px', whiteSpace:'nowrap' }}>
                           <button onClick={e => { e.stopPropagation(); setVerDetalle(r) }} title="Ver detalle"
                             style={{ marginRight:'4px', padding:'5px 7px', background:'#EFF6FF', color:'#0A66C2', border:'none', borderRadius:'6px', cursor:'pointer', display:'inline-flex', alignItems:'center' }}><Eye size={13} /></button>
+                          <button onClick={e => { e.stopPropagation(); setModalData(r) }} title="Editar"
+                            style={{ marginRight:'4px', padding:'5px 7px', background:'#F3F4F6', color:'#374151', border:'none', borderRadius:'6px', cursor:'pointer', display:'inline-flex', alignItems:'center' }}><Pencil size={13} /></button>
                           <button onClick={e => { e.stopPropagation(); setConfirmDel(r) }} title="Eliminar"
                             style={{ padding:'5px 7px', background:'#FEF2F2', color:'#B91C1C', border:'none', borderRadius:'6px', cursor:'pointer', display:'inline-flex', alignItems:'center' }}><Trash2 size={13} /></button>
                         </td>
