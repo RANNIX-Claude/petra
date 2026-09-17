@@ -1,5 +1,5 @@
 /**
- * subir-comprobante.js — IRP · RANNIX Consulting 2026
+ * subir-comprobante.js — Petra · RANNIX Consulting 2026
  *
  * Sube un archivo a Storage con la service_role key, desde el servidor.
  *
@@ -36,10 +36,10 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 // cualquier página del mundo llamar a la función desde el navegador.
 function corsOrigin(event) {
   const origin = event.headers.origin || event.headers.Origin || ''
-  const ok = /^https:\/\/([a-z0-9-]+--)?irpapp\.netlify\.app$/.test(origin)   // producción y deploy previews
-    || /^https:\/\/deploy-preview-\d+--irpapp\.netlify\.app$/.test(origin)
+  const ok = /^https:\/\/([a-z0-9-]+--)?petraprp\.netlify\.app$/.test(origin)
+    || /^https:\/\/deploy-preview-\d+--petraprp\.netlify\.app$/.test(origin)
     || /^http:\/\/localhost:\d+$/.test(origin)
-  return ok ? origin : 'https://irpapp.netlify.app'
+  return ok ? origin : 'https://petraprp.netlify.app'
 }
 
 /**
