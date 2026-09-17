@@ -50,7 +50,7 @@ export default function Header() {
               <span style={{ fontSize: '10px', fontWeight: 800, padding: '1px 7px', borderRadius: '4px', background: '#7C3AED', color: 'white', letterSpacing: '0.05em' }}>QA</span>
             )}
           </div>
-          <div style={{ fontSize: '10px', opacity: 0.8, lineHeight: 1 }}>Inmueble Resource Planning</div>
+          <div style={{ fontSize: '10px', opacity: 0.8, lineHeight: 1 }}>Espacios · Transacciones · Rentas · Administración</div>
         </div>
       </div>
 

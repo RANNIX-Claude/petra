@@ -5,7 +5,7 @@
 
 ## Identidad del Proyecto
 
-**Petra** es una plataforma SaaS multi-tenant para la administración integral de inmuebles comerciales en México (plazas comerciales, edificios de oficinas, consultorios médicos, bodegas industriales).
+**Petra** *(Plataforma de Espacios, Transacciones, Rentas y Administración)* es una plataforma SaaS multi-tenant para la administración integral de inmuebles comerciales en México (plazas comerciales, edificios de oficinas, consultorios médicos, bodegas industriales).
 
 Desarrollado por **Roberto Aguilar Cota / RANNIX Consulting**.
 

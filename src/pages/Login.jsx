@@ -58,7 +58,7 @@ export default function Login() {
             Petra
           </h1>
           <p style={{ fontSize: '13px', color: 'var(--color-text-light)', margin: 0 }}>
-            Inmueble Resource Planning
+            Plataforma de Espacios, Transacciones, Rentas y Administración
           </p>
         </div>
 
